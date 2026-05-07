@@ -423,4 +423,164 @@ CultureInfo.CurrentCulture = new CultureInfo("en-US");
 // G3003    - Error
 /////////////////////////////////////////////////////
 
+//////////////////FORMAT()//////////////////////////
+//COMPOSITE FORMATTING::::
 
+
+// string first = "Hello";
+// string second = "World";
+// string third = "Honey";
+// string result = string.Format("{0} {1}!", first, second); //the order the strings are in doesn't matter because of the numbers in the curly brackets, {0} is whatever the first string is, {1} is whatever the second string is, and so on. The numbers in the curly brackets are placeholders for the values that are passed in as arguments to the Format() method. The first argument is the format string, which contains the text and the placeholders, and the subsequent arguments are the values that will replace those placeholders in the final output string.
+// Console.WriteLine(result);
+
+// Console.WriteLine("{2} {1} {0}!", first, third, second);  //how does it know that the first value is second and the second value is first? because of the numbers in the curly brackets, it knows to swap them around
+// Console.WriteLine("{0} {0} {0}!", first, second); //the first value is repeated three times because of the {0} in the curly brackets, it knows to use the first value for all three of those placeholders, and ignores the second value because there is no placeholder for it
+
+
+// Console.WriteLine($"{first} {second}!");
+// Console.WriteLine($"{second} {first}!");
+// Console.WriteLine($"{first} {first} {first}!");
+
+//String Interpolation// - better practice than Composite formatting, more concise and readable
+//String interpolation is a more concise and readable way to format strings in C#. It allows you to embed expressions directly within string literals, using the syntax $"{expression}". The expressions inside the curly braces are evaluated and their results are included in the final string. This approach can make your code cleaner and easier to understand compared to using String.Format().
+//FORMATTING CURRENCY:::    
+
+// decimal price = 123.45m;
+// int discount = 50;
+// Console.WriteLine($"Price: {price:C} (Save {discount:C})"); //you get $dollars if your language is set to en-US, but if your language is set to something else, you would get the currency symbol for that language instead. The "C" format specifier formats the number as a currency value, including the appropriate currency symbol and decimal places based on the current culture settings of the system.
+
+
+// decimal measurement = 123456.78912m;
+// Console.WriteLine($"Measurement: {measurement:N} units"); //The "N" format specifier formats the number with thousands separators and a specified number of decimal places. By default, it includes two decimal places, but you can specify a different number of decimal places by using "N" followed by the desired number (e.g., "N3" for three decimal places). The output will also include the appropriate thousands separators based on the current culture settings of the system.
+// //Measurement: 123,456.79 units
+
+// decimal measurement = 123456.78912m; // the "m" suffix indicates that this is a decimal literal, which is important for ensuring that the value is treated as a decimal type rather than a double or float. This allows for higher precision and is particularly useful when working with financial data or any scenario where you need an accurate result from a calculation.
+// Console.WriteLine($"Measurement: {measurement:N4} units");
+// //Measurement: 123,456.7891 units
+////////////////////////////////////
+// //FORMATTING PERCENTAGES:::
+
+// decimal tax = .36785m;
+// Console.WriteLine($"Tax rate: {tax:P2}"); //The "P" format specifier formats the number as a percentage value, multiplying it by 100 and appending the percent sign (%). The number of decimal places can be specified after the "P" (e.g., "P2" for two decimal places).
+//Tax rate: 36.79%
+
+// decimal tax =.12051m;
+// Console.WriteLine($"Tax rate: {tax:P1}");
+// //Tax rate: 12.1%
+///////////////////////////////////
+// //COMBINING FORMAT SPECIFIERS:::
+// decimal price = 67.55m;
+// decimal salePrice = 59.99m;
+
+// string yourDiscount = String.Format("You saved {0:C2} off the regular {1:C2} price. ", (price - salePrice), price);
+
+// yourDiscount += $"A discount of {((price - salePrice)/price):P2}!"; //inserted
+// Console.WriteLine(yourDiscount);
+//You saved $7.56 off the regular $67.55 price. A discount of 11.19%!
+
+//CHALLENGE:::
+
+// int invoiceNumber = 1201;
+// decimal productShares = 25.4568m;
+// decimal subtotal = 2750.00m;
+// decimal taxPercentage = .15825m;
+// decimal total = 3185.19m;
+
+// Console.WriteLine($"Invoice Number: {invoiceNumber}");
+// Console.WriteLine($"   Shares: {productShares:N3} Product"); //shows 3 numbers after the decimal point and rounds off the last number
+// Console.WriteLine($"     Sub Total: {subtotal:C}");
+// Console.WriteLine($"           Tax: {taxPercentage:P2}");
+// Console.WriteLine($"     Total Billed: {total:C}");
+
+//RESPONSE:::
+// Invoice Number: 1201
+//    Shares: 25.457 Product
+//      Sub Total: $2,750.00
+//            Tax: 15.83%
+//      Total Billed: $3,185.19
+
+//////////////////////////////
+/// string.Format() method is used to perform composite formatting
+
+/// PadLeft(), PadRight() -- adds blank spacing for formatting purposes
+/// (Trim(), TrimStart(), TrimEnd(), GetHashcode(), the Length property) -- compare two strings or facilitate string manipulation
+/// (Contains(), StartsWith(), EndsWith(), Substring()) -- search for specific characters or substrings within a string
+/// (Replace(), Insert(), Remove()) -- modify the contents of a string
+/// (Split(), ToCharArray()) -- break a string into an array of substrings or characters
+/////////////////////////////
+
+// string input = "Pad this";
+//  Console.WriteLine(input.PadLeft(12)); //the last four characters are preserved at the end of the 12 spaces for the string
+// Console.WriteLine(input.PadRight(12));
+
+//Overloaded methods: PadLeft() and PadRight() have overloaded versions that allow you to specify a custom padding character instead of the default space character. For example, input.PadLeft(12, '-') would pad the string with hyphens instead of spaces. This can be useful for creating visually distinct formatting or for aligning text in a specific way.
+// -> they have multiple versions of the method with different arguments that affect their functionality
+// += operator concatenates a new string on the right to the existing string on the left.
+
+// Console.WriteLine(input.PadLeft(12, '-'));
+//  Console.WriteLine(input.PadRight(12, '-'));
+
+//RESPONSE:::
+//     Pad this
+// Pad this    
+// ----Pad this
+// Pad this----
+
+// string paymentId = "769C";
+//  string payeeName = "Mr. Stephen Ortega";
+//  string paymentAmount = "$5,000.00";
+
+//  var formattedLine = paymentId.PadRight(6);
+//  formattedLine += payeeName.PadRight(24);
+//  formattedLine += paymentAmount.PadLeft(10);
+//  Console.WriteLine("1234567890123456789012345678901234567890");
+//  Console.WriteLine(formattedLine);
+
+////////CHALLENGE:::
+
+string customerName = "Ms. Barros"; //0
+
+string currentProduct = "Magic Yield"; //1
+int currentShares = 2975000;            //2
+decimal currentReturn = 0.1275m;         //3
+decimal currentProfit = 55000000.0m;     //6
+
+string newProduct = "Glorious Future";  //4
+decimal newReturn = 0.13125m;           //5
+decimal newProfit = 63000000.0m;         //7
+
+//MY CODE:::
+string firstSentence = String.Format($"Dear {customerName},");
+string secondSentence = String.Format($"\nAs a customer of our {currentProduct} offering we are excited to tell you about a new financial product that would dramatically increase your return.");
+
+string thirdSentence = String.Format($"\n\nCurrently, you own {currentShares:C} shares at a return of {currentReturn:P2}.");
+
+string fourthSentence = String.Format($"\n\nOur new product, {newProduct} offers a return of {newReturn:P2}. Given your current volume, your potential profit would be {newProfit:C}.");
+
+string sentence = firstSentence + secondSentence + thirdSentence + fourthSentence;
+// Your logic here
+
+Console.WriteLine(sentence);
+Console.WriteLine("Here's a quick comparison:\n");
+
+//Microsoft solution:::
+Console.WriteLine("Dear {0},", customerName);
+
+comparisonMessage = currentProduct.PadRight(20);
+comparisonMessage += String.Format("{0:P}", currentReturn).PadRight(10);
+comparisonMessage += String.Format("{0:C}", currentProfit).PadRight(20);
+
+comparisonMessage += "\n";
+comparisonMessage += newProduct.PadRight(20);
+comparisonMessage += String.Format("{0:P}", newReturn).PadRight(10);
+comparisonMessage += String.Format("{0:C}", newProfit).PadRight(20);
+
+Console.WriteLine(comparisonMessage);
+//Broken down:::
+
+// Magic Yield
+// Magic Yield         12.75%
+// Magic Yield         12.75%    $55,000,000.00
+
+
+//use String.Format() when using padRight() and padLeft() 

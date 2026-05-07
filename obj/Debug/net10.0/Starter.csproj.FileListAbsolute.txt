@@ -12,3 +12,4 @@ C:\Users\nikitar\Downloads\Guided-project-branching-looping-CSharp-main\GuidedPr
 C:\Users\nikitar\Downloads\Guided-project-branching-looping-CSharp-main\GuidedProject\intType\obj\Debug\net10.0\Starter.pdb
 C:\Users\nikitar\Downloads\Guided-project-branching-looping-CSharp-main\GuidedProject\intType\obj\Debug\net10.0\Starter.genruntimeconfig.cache
 C:\Users\nikitar\Downloads\Guided-project-branching-looping-CSharp-main\GuidedProject\intType\obj\Debug\net10.0\ref\Starter.dll
+C:\Users\nikitar\Downloads\Guided-project-branching-looping-CSharp-main\GuidedProject\intType\obj\Debug\net10.0\Starter.sourcelink.json
