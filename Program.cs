@@ -538,49 +538,109 @@ CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
 ////////CHALLENGE:::
 
-string customerName = "Ms. Barros"; //0
+// string customerName = "Ms. Barros"; //0
 
-string currentProduct = "Magic Yield"; //1
-int currentShares = 2975000;            //2
-decimal currentReturn = 0.1275m;         //3
-decimal currentProfit = 55000000.0m;     //6
+// string currentProduct = "Magic Yield"; //1
+// int currentShares = 2975000;            //2
+// decimal currentReturn = 0.1275m;         //3
+// decimal currentProfit = 55000000.0m;     //6
 
-string newProduct = "Glorious Future";  //4
-decimal newReturn = 0.13125m;           //5
-decimal newProfit = 63000000.0m;         //7
+// string newProduct = "Glorious Future";  //4
+// decimal newReturn = 0.13125m;           //5
+// decimal newProfit = 63000000.0m;         //7
 
-//MY CODE:::
-string firstSentence = String.Format($"Dear {customerName},");
-string secondSentence = String.Format($"\nAs a customer of our {currentProduct} offering we are excited to tell you about a new financial product that would dramatically increase your return.");
+// //MY CODE:::
+// string firstSentence = String.Format($"Dear {customerName},");
+// string secondSentence = String.Format($"\nAs a customer of our {currentProduct} offering we are excited to tell you about a new financial product that would dramatically increase your return.");
 
-string thirdSentence = String.Format($"\n\nCurrently, you own {currentShares:C} shares at a return of {currentReturn:P2}.");
+// string thirdSentence = String.Format($"\n\nCurrently, you own {currentShares:C} shares at a return of {currentReturn:P2}.");
 
-string fourthSentence = String.Format($"\n\nOur new product, {newProduct} offers a return of {newReturn:P2}. Given your current volume, your potential profit would be {newProfit:C}.");
+// string fourthSentence = String.Format($"\n\nOur new product, {newProduct} offers a return of {newReturn:P2}. Given your current volume, your potential profit would be {newProfit:C}.");
 
-string sentence = firstSentence + secondSentence + thirdSentence + fourthSentence;
-// Your logic here
+// string sentence = firstSentence + secondSentence + thirdSentence + fourthSentence;
+// // Your logic here
 
-Console.WriteLine(sentence);
-Console.WriteLine("Here's a quick comparison:\n");
+// Console.WriteLine(sentence);
+// Console.WriteLine("Here's a quick comparison:\n");
 
-//Microsoft solution:::
-Console.WriteLine("Dear {0},", customerName);
+// //Microsoft solution:::
+// Console.WriteLine("Dear {0},", customerName);
 
-comparisonMessage = currentProduct.PadRight(20);
-comparisonMessage += String.Format("{0:P}", currentReturn).PadRight(10);
-comparisonMessage += String.Format("{0:C}", currentProfit).PadRight(20);
+// comparisonMessage = currentProduct.PadRight(20);
+// comparisonMessage += String.Format("{0:P}", currentReturn).PadRight(10);
+// comparisonMessage += String.Format("{0:C}", currentProfit).PadRight(20);
 
-comparisonMessage += "\n";
-comparisonMessage += newProduct.PadRight(20);
-comparisonMessage += String.Format("{0:P}", newReturn).PadRight(10);
-comparisonMessage += String.Format("{0:C}", newProfit).PadRight(20);
+// comparisonMessage += "\n";
+// comparisonMessage += newProduct.PadRight(20);
+// comparisonMessage += String.Format("{0:P}", newReturn).PadRight(10);
+// comparisonMessage += String.Format("{0:C}", newProfit).PadRight(20);
 
-Console.WriteLine(comparisonMessage);
-//Broken down:::
+// Console.WriteLine(comparisonMessage);
+// //Broken down:::
 
 // Magic Yield
 // Magic Yield         12.75%
 // Magic Yield         12.75%    $55,000,000.00
 
-
 //use String.Format() when using padRight() and padLeft() 
+
+/////////////////////////////////INDEXOF() and SUBSTRING()/////////////////////////////////////////////////////////////
+
+// string message = "Find what is (inside the parentheses)";
+
+// int openingPosition = message.IndexOf('(');
+// int closingPosition = message.IndexOf(')');
+
+// Console.WriteLine(openingPosition);
+// Console.WriteLine(closingPosition);
+
+// string sentence = message.Substring(14, 36);//MY CODE
+//why doesn't 13 work if you want to start from the middle of the parentheses? because the index starts at 0, so the first character is at index 0, the second character is at index 1, and so on. Therefore, the opening parenthesis is at index 13, and if you want to start from the middle of the parentheses, you would need to use index 14 to get the first character inside the parentheses. If you use index 13, you would get the opening parenthesis itself instead of the content inside it.
+//14 doesn't work because the length of the substring is 36, which goes beyond the closing parenthesis. The closing parenthesis is at index 36, so if you start at index 14 and try to get a substring of length 36, it will go out of bounds of the string. You need to calculate the length of the substring based on the positions of the opening and closing parentheses. The length should be closingPosition - openingPosition - 1, which gives you the number of characters between the parentheses.
+// Console.WriteLine(sentence);
+
+//MicroS SOLUTION:::
+// openingPosition += 1;
+
+//MicrS and MY SOLUTION:::
+// int length = closingPosition - openingPosition - 1; 
+// Console.WriteLine(message.Substring(openingPosition + 1, length));//The Substring() method needs the starting position and the number of characters, or length, to retrieve
+
+//I added a 1 to the openingPosition to start the substring from the character after the opening parenthesis, and then subtracting 1 to exclude the parentheses at the end. This way, you get only the content inside the parentheses.
+//use a string variable with an index position instead of inserting a number thats more than 1 to get the correct substring length, because the length of the substring can change depending on where the parentheses are located in the string. By calculating the length based on the positions of the opening and closing parentheses, you can ensure that you get the correct substring regardless of where the parentheses are in the message.
+
+
+// string message = "What is the value <span>between the tags</span>?";
+
+// int openingPosition = message.IndexOf("<span>");
+// int closingPosition = message.IndexOf("</span>");
+// //Hardcoded strings like "<span>" in the previous code listing are known as "magic strings" and hardcoded numeric values like 6 are known as "magic numbers". These "Magic" values are undesirable for many reasons and you should try to avoid them if possible.
+
+// openingPosition += 6;
+// int length = closingPosition - openingPosition;
+// Console.WriteLine(message.Substring(openingPosition, length));
+
+////////////OR:::
+
+// string message = "What is the value <span>between the tags</span>?";
+
+// const string openSpan = "<span>"; //made a const so that if there is a discrepancy on the name of the variable you calling to index, it shoots an error and you'll know where it needs to be fixed
+// const string closeSpan = "</span>";
+
+// int openingPosition = message.IndexOf(openSpan);
+// int closingPosition = message.IndexOf(closeSpan);
+
+// openingPosition += openSpan.Length; //instead of adding 6, you can add the length of the openSpan variable, which is 6, but if you change the name of the variable or the value of the variable, it will still work because it's based on the length of the variable rather than a hardcoded number. This makes your code more maintainable and less error-prone.
+// int length = closingPosition - openingPosition;
+// Console.WriteLine(message.Substring(openingPosition, length));
+
+//////////////LastIndexOf()////////////////////////////////
+// - also returns -1 if value isn't found
+string message = "hello there!";
+
+int first_h = message.IndexOf('h');
+int last_h = message.LastIndexOf('h');
+
+Console.WriteLine($"For the message: '{message}', the first 'h' is at position {first_h} and the last 'h' is at position {last_h}.");
+
+
