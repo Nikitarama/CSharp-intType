@@ -636,11 +636,74 @@ CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
 //////////////LastIndexOf()////////////////////////////////
 // - also returns -1 if value isn't found
-string message = "hello there!";
 
-int first_h = message.IndexOf('h');
-int last_h = message.LastIndexOf('h');
+// string message = "hello there!";
 
-Console.WriteLine($"For the message: '{message}', the first 'h' is at position {first_h} and the last 'h' is at position {last_h}.");
+// int first_h = message.IndexOf('h');
+// int last_h = message.LastIndexOf('h');
+
+// Console.WriteLine($"For the message: '{message}', the first 'h' is at position {first_h} and the last 'h' is at position {last_h}.");
+
+//////////////////////////////////////////////////
+
+// string message = "(What if) I am (only interested) in the last (set of parentheses)?";
+// int openingPosition = message.LastIndexOf('(');
+
+// openingPosition += 1;
+// int closingPosition = message.LastIndexOf(')');
+// int length = closingPosition - openingPosition;
+// Console.WriteLine(message.Substring(openingPosition, length));
+
+///RESPONSE:::
+
+//set of parentheses
+//////////////////////////////////////////////////
+
+// string message = "(What if) I am (only interested) in the last (set of parentheses)?";
+// while (true)
+// {
+//     int openingPosition = message.IndexOf('(');
+//     if (openingPosition == -1) break;// If there are no more opening parentheses, exit the loop therefore skips the "?"
+
+//     openingPosition += 1; // Move past the opening parenthesis
+//     int closingPosition = message.IndexOf(')');
+//     int length = closingPosition - openingPosition; // Calculate the length of the substring between the parentheses
+//     Console.WriteLine(message.Substring(openingPosition, length));//the first argument is the starting position of the substring, and the second argument is the length of the substring, which is calculated as the difference between the closing and opening positions. This way, you can extract the content inside each pair of parentheses in the message.
+
+//     // Note the overload of the Substring to return only the remaining 
+//     // unprocessed message:
+//     message = message.Substring(closingPosition + 1); // we add 1 to start after the closing parenthesis for the next iteration
+// }
+
+//When you use Substring() without specifying a length input parameter, it will return every character after the starting position you specify
+
+
+////////////////IndexOfAny()//////////////////////////////////
+//- The IndexOfAny() reports the index of the first occurrence of any character in a supplied array of characters. The method returns -1 if all characters in the array of characters are not found
+
+// string message = "Hello, world!";
+// char[] charsToFind = { 'a', 'e', 'i' };//the method will return the index of the first occurrence of any of the characters in the charsToFind array, which in this case is 'e' at index 1. If none of the characters in the charsToFind array were found in the message string, the method would return -1.
+
+// int index = message.IndexOfAny(charsToFind);
+
+// Console.WriteLine($"Found '{message[index]}' in '{message}' at index: {index}.");
+//////////////////////////////////////////////
+
+string message = "Help (find) the {opening symbols}";
+Console.WriteLine($"Searching THIS Message: {message}");
+char[] openSymbols = { '[', '{', '(' };
+int startPosition = 5;
+int openingPosition = message.IndexOfAny(openSymbols);
+Console.WriteLine($"Found WITHOUT using startPosition: {message.Substring(openingPosition)}");
+
+openingPosition = message.IndexOfAny(openSymbols, startPosition);
+Console.WriteLine($"Found WITH using startPosition {startPosition}:  {message.Substring(openingPosition)}");
+
+
+
+
+
+
+
 
 
